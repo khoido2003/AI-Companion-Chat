@@ -4,10 +4,11 @@ import { Poppins } from "next/font/google";
 import Link from "next/link";
 
 import { cn } from "@/lib/utils";
-import { Menu, Sparkle } from "lucide-react";
 import { UserButton } from "@clerk/nextjs";
 import { Button } from "./ui/button";
 import { ModeToggle } from "./mode-toggle";
+import MobileSideBar from "./mobile-sidebar";
+import { Sparkle } from "lucide-react";
 
 const font = Poppins({
   weight: "600",
@@ -16,9 +17,9 @@ const font = Poppins({
 
 export const NavBar = () => {
   return (
-    <div className="fixed w-full z-50 flex justify-between items-center py-2 px-4 border-b border-primary/10 bg-secondary">
+    <div className="fixed w-full z-50 flex justify-between items-center py-2 px-4 border-b border-primary/10 bg-secondary h-16">
       <div className="flex items-center">
-        <Menu className="block md:hidden" />
+        <MobileSideBar />
         <Link href="/" />
         <h1
           className={cn(
