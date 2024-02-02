@@ -34,10 +34,10 @@ export const Companions = ({ data }: CompanionProps) => {
         return (
           <Card
             key={item.id}
-            className="cursor-pointer rounded-xl border-0 bg-primary/10 transition hover:opacity-75"
+            className="cursor-pointer rounded-xl border-0 bg-primary/10 pt-3 transition hover:opacity-75"
           >
             <Link href={`/chat/${item.id}`}>
-              <CardHeader className="flex items-center justify-center text-center text-muted-foreground">
+              <CardHeader className="flex h-[250px] items-center justify-start text-center text-muted-foreground">
                 <div className="relative h-32 w-32">
                   <Image
                     src={item.src}

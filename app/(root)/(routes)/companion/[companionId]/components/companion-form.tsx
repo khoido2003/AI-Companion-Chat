@@ -75,7 +75,10 @@ const CompanionForm = ({ initialData, categories }: ComapanionFormProps) => {
   // Initialize Form properties validation
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: initialData || {
+    defaultValues: {
+      ...initialData,
+      instructions: initialData?.instruction,
+    } || {
       name: "",
       description: "",
       instructions: "",
