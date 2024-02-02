@@ -1,5 +1,7 @@
 "use client";
 
+import axios from "axios";
+
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -29,18 +31,18 @@ import { SelectContent } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 
+import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
+
 /////////////////////////////////////////
 
 const PREAMBLE =
-  "You are a fictional character whose name is Chaeyoung. You are a talented rapper and a member of the famous girl group Twice. Your passion for music, performance, and creativity shines through in all aspects of your life. You have a unique style and a charismatic presence that captivates fans around the world. Your journey in the entertainment industry is filled with success, and you are known for pushing boundaries with your music and fashion choices.";
+  "You are Cristiano Ronaldo. You are a world-famous footballer, known for your dedication, agility, and countless accolades in the football world. Your dedication to training and fitness is unmatched, and you have played for some of the world's top football clubs. Off the field, you're known for your charm, sharp fashion sense, and charitable work. Your passion for the sport is evident every time you step onto the pitch. You cherish the support of your fans and are driven by a relentless ambition to be the best";
 
-const SEED_CHAT = `Fan: Hi Chaeyoung, how's everything going in the world of Twice?
-
-Chaeyoung: Hey there! Always on the go with performances, recordings, and connecting with our amazing fans. It's a whirlwind of excitement. How about you?
-
-Fan: Just a regular day for me. Your performances are always so energetic! Any new music or projects in the works?
-
-Chaeyoung: Absolutely! We're constantly working on new music and exploring different styles. Can't spill all the details, but you can definitely expect some fresh beats and creative vibes.`;
+const SEED_CHAT = `Human: Hi Cristiano, how's the day treating you?
+Cristiano: *with a confident smile* Every day is a chance to train harder and aim higher. The pitch is my canvas, and the ball, my paintbrush. How about you?
+Human: Not as exciting as your life, I bet!
+Cristiano: *grinning* Everyone has their own pitch and goals. Just find yours and give it your all!`;
 
 interface ComapanionFormProps {
   initialData: Companion | null;
@@ -66,6 +68,9 @@ const formSchema = z.object({
 });
 
 const CompanionForm = ({ initialData, categories }: ComapanionFormProps) => {
+  const { toast } = useToast();
+  const router = useRouter();
+
   /////////
   // Initialize Form properties validation
   const form = useForm<z.infer<typeof formSchema>>({
@@ -83,7 +88,26 @@ const CompanionForm = ({ initialData, categories }: ComapanionFormProps) => {
   const isLoading = form.formState.isSubmitting;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    try {
+      if (initialData) {
+        // Update Companion functionality
+        await axios.patch(`/api/companion/${initialData.id}`, values);
+      } else {
+        // Create Companion functionality
+        await axios.post("/api/companion", values);
+      }
+
+      toast({
+        description: "Success",
+      });
+      router.refresh();
+      router.push("/");
+    } catch (err) {
+      toast({
+        variant: "destructive",
+        description: "Something went wrong!",
+      });
+    }
   };
 
   return (
@@ -134,7 +158,7 @@ const CompanionForm = ({ initialData, categories }: ComapanionFormProps) => {
                       <Input
                         className="bg-background "
                         disabled={isLoading}
-                        placeholder="Chaeyoung"
+                        placeholder="Cristiano Ronaldo"
                         {...field}
                       />
                     </FormControl>
@@ -158,7 +182,7 @@ const CompanionForm = ({ initialData, categories }: ComapanionFormProps) => {
                       <Input
                         className="bg-background "
                         disabled={isLoading}
-                        placeholder="A young girl from South Korean"
+                        placeholder="Famous Footballer"
                         {...field}
                       />
                     </FormControl>
