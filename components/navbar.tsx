@@ -17,14 +17,14 @@ const font = Poppins({
 
 export const NavBar = () => {
   return (
-    <div className="fixed w-full z-50 flex justify-between items-center py-2 px-4 border-b border-primary/10 bg-secondary h-16">
+    <div className="fixed z-50 flex h-16 w-full items-center justify-between border-b border-primary/10 bg-secondary px-4 py-2">
       <div className="flex items-center">
         <MobileSideBar />
         <Link href="/">
           <h1
             className={cn(
-              "hidden md:block text-xl md:text-3xl font-bold text-primary",
-              font.className
+              "hidden text-xl font-bold text-primary md:block md:text-3xl",
+              font.className,
             )}
           >
             Companion AI
@@ -34,11 +34,11 @@ export const NavBar = () => {
       <div className="flex items-center gap-x-3">
         <Button variant="premium">
           Upgrade
-          <Sparkle className="h-4 w-4 fill-white text-white ml-2" />
+          <Sparkle className="ml-2 h-4 w-4 fill-white text-white" />
         </Button>
 
         <ModeToggle />
-        <UserButton afterSignOutUrl="/" />
+        <UserButton afterSignOutUrl="/sign-in" />
       </div>
     </div>
   );
