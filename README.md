@@ -51,7 +51,7 @@ Thank you for choosing **Companion AI** for your interactive AI conversations! W
    ```
 
 
-2. **Run the development server:
+2. **Run the development server:**
 
 ```bash
 npm run dev
