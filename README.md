@@ -46,13 +46,12 @@ Thank you for choosing **Companion AI** for your interactive AI conversations! W
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/YourUsername/companion-ai.git
-   cd companion-ai
+   git clone https://github.com/khoido2003/AI-Companion-Chat.git
+   cd AI-Companion-Chat
    ```
 
-## Getting Started
 
-First, run the development server:
+2. **Run the development server:
 
 ```bash
 npm run dev
