@@ -44,13 +44,13 @@ const ChatMessages = ({
         content={`Hello, I am ${companion.name}, ${companion.description}`}
       />
 
-      {messages.map((message) => {
+      {messages.map((message, idx) => {
         return (
           <ChatMessage
-            key={message.content}
+            key={idx}
             role={message.role}
             content={message.content}
-            src={message.src}
+            src={companion.src}
           />
         );
       })}
